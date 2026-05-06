@@ -1,0 +1,400 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+:root {
+    --primary-color: #f46f62;
+    --primary-hover: #e85b4e;
+    --text-dark: #463833;
+    --text-light: #7e6a63;
+    --card-bg: rgba(255, 255, 255, 0.82);
+    --input-bg: rgba(255, 250, 248, 0.95);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background:
+        radial-gradient(circle at 13% 13%, rgba(255, 219, 144, 0.68) 0 7%, transparent 7.5%),
+        radial-gradient(circle at 84% 14%, rgba(255, 174, 166, 0.62) 0 5.5%, transparent 6%),
+        radial-gradient(circle at 23% 82%, rgba(129, 217, 227, 0.26) 0 8%, transparent 8.5%),
+        radial-gradient(circle at 78% 78%, rgba(246, 198, 111, 0.2) 0 7%, transparent 7.5%),
+        linear-gradient(180deg, #f7ebc8 0%, #f4e3ba 42%, #d8eef0 42%, #d8eef0 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    left: 0;
+    width: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+body::before {
+    bottom: -12vh;
+    height: 34vh;
+    background: linear-gradient(180deg, #2fcae3 0%, #76d7e4 100%);
+    border-radius: 50% 50% 0 0;
+    transform: scaleX(1.08);
+}
+
+body::after {
+    top: 0;
+    height: 100%;
+    background:
+        radial-gradient(circle at 10% 25%, rgba(255, 136, 136, 0.28) 0 0.7%, transparent 0.75%),
+        radial-gradient(circle at 18% 35%, rgba(255, 208, 120, 0.28) 0 0.6%, transparent 0.65%),
+        radial-gradient(circle at 80% 18%, rgba(255, 205, 128, 0.34) 0 0.7%, transparent 0.75%),
+        radial-gradient(circle at 86% 32%, rgba(255, 154, 171, 0.24) 0 0.5%, transparent 0.55%);
+}
+
+/* Le conteneur avec l'effet "Verre dépoli" (Glassmorphism) */
+.form-container {
+    width: 100%;
+    max-width: 430px;
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--text-dark);
+    border-radius: 20px;
+    padding: 32px 24px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    position: relative;
+    z-index: 1;
+}
+
+h1 {
+    margin: 0 0 20px;
+    text-align: center;
+    color: var(--text-dark);
+    font-size: clamp(1.5rem, 2.5vw, 1.8rem);
+    font-weight: 700;
+}
+
+fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+}
+
+legend {
+    margin-bottom: 14px;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.input-group {
+    margin-bottom: 16px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+/* Style des champs de saisie */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+select {
+    width: 100%;
+    height: 45px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    padding: 0 16px;
+    background: var(--input-bg);
+    color: var(--text-dark);
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+}
+
+select {
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--text-dark) 50%), 
+                      linear-gradient(135deg, var(--text-dark) 50%, transparent 50%);
+    background-position: calc(100% - 20px) 20px, calc(100% - 15px) 20px;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+}
+
+input::placeholder {
+    color: #a4b0be;
+}
+
+/* Effet quand on clique sur un champ */
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(244, 111, 98, 0.16);
+}
+
+.password-wrapper {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+}
+
+/* Bouton afficher/masquer le mot de passe */
+.btn-toggle {
+    border: 1px solid rgba(244, 111, 98, 0.18);
+    border-radius: 10px;
+    padding: 0 14px;
+    background: #fff7f4;
+    color: var(--text-dark);
+    font-weight: 600;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-toggle:hover {
+    background: #ffe9e4;
+}
+
+/* Bouton d'action principal (Rouge pastèque/fraise) */
+.btn-primary {
+    width: 100%;
+    height: 48px;
+    margin-top: 15px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--primary-color);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(244, 111, 98, 0.25);
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(244, 111, 98, 0.32);
+}
+
+/* Validation visuelle HTML5 */
+input:invalid:not(:placeholder-shown) {
+    border-color: #ff7f6d;
+}
+
+input:valid:not(:placeholder-shown) {
+    border-color: #63c0d5;
+}
+
+/* Liens en bas du formulaire */
+.auth-switch {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+}
+
+.auth-switch p {
+    margin: 0;
+}
+
+.auth-switch a {
+    color: var(--primary-color);
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.auth-switch a:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+/* --- DASHBOARD THEME PASTEL --- */
+
+:root {
+    --accent-orange: #f46f62;
+    --accent-blue: #63c0d5;
+    --accent-warm: #f7b55f;
+    --white-glass: rgba(255, 255, 255, 0.88);
+}
+
+.dashboard-container {
+    max-width: 1000px;
+    width: 95%;
+    padding: 20px;
+}
+
+/* Header & Nav */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.logo { font-size: 1.5rem; font-weight: 800; color: #1e3799; }
+
+.wallet-badge {
+    background: #fff;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.welcome-section {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.welcome-section h1 { font-size: 2.2rem; color: #1e3799; }
+
+/* Layout */
+.main-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 25px;
+}
+
+.glass-card {
+    background: var(--white-glass);
+    backdrop-filter: blur(10px);
+    border-radius: 25px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+}
+
+/* IMC Cercle */
+.circle-chart {
+    width: 120px;
+    height: 120px;
+    border: 8px solid var(--accent-warm);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px auto;
+}
+
+.imc-number { font-size: 2rem; font-weight: 800; color: var(--accent-orange); }
+
+/* Goal Selection Style */
+.goal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.goal-card { cursor: pointer; }
+
+.goal-card input { display: none; }
+
+.goal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid transparent;
+    transition: 0.3s;
+}
+
+.goal-card input:checked + .goal-content {
+    border-color: var(--accent-orange);
+    background: #fff9f0;
+    transform: scale(1.05);
+}
+
+.goal-content .icon { font-size: 2rem; margin-bottom: 10px; }
+.goal-content .text { font-size: 0.85rem; font-weight: 600; }
+
+/* CTA Buttons */
+.btn-cta {
+    width: 100%;
+    padding: 18px;
+    background: var(--accent-orange);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(244, 111, 98, 0.26);
+}
+
+.btn-gold-action {
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(45deg, #ffd56a, #f8a85a);
+    border: none;
+    color: white;
+    border-radius: 10px;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+.btn-pdf {
+    background: #8f6b63;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Mobile Responsive */
+@media (max-width: 850px) {
+    .main-layout { grid-template-columns: 1fr; }
+    .goal-grid { grid-template-columns: 1fr; }
+}
+/* Adaptation pour les petits écrans de téléphone */
+@media (max-width: 560px) {
+    body {
+        padding: 16px;
+    }
+
+    .form-container {
+        padding: 24px 20px;
+    }
+
+    .password-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .btn-toggle {
+        height: 40px;
+    }
+}
