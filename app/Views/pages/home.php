@@ -7,5 +7,6 @@
 </head>
 <body>
     <h1>METY</h1>
+    <a href="/logout">Se déconnecter</a>
 </body>
 </html>
