@@ -1,0 +1,27 @@
+1. Authentification et Onboarding
+- Connexion / Login
+- Inscription (en 2 pages distinctes):
+Page 1 : Informations de l'utilisateur (nom, email, genre, etc.)
+Page 2 : Informations de santé (taille, poids)
+
+2. Profil et Accueil
+- Complétion du profil de l'utilisateur
+- Affichage de l'IMC (Indice de Masse Corporelle) calculé par le système
+
+3. Objectifs et Suggestions (Cœur de l'application)
+- Sélection d'un objectif parmi trois choix:
+    - Augmenter son poids
+    - Réduire son poids
+    - Atteindre son IMC idéal
+    - Affichage des régimes suggérés et des activités sportives associées pour une durée spécifique
+    - Bouton pour exporter les suggestions sur PDF
+
+4. Monétisation et Paiement
+- Gestion du porte-monnaie : Formulaire permettant de rentrer un code pour ajouter de l'argent sur le compte
+- Souscription à l'Option Gold : Interface pour payer cette option en une seule fois (à vous de définir le prix et le mode d'accès), permettant d'appliquer automatiquement 15% de remise sur tous les régimes
+
+_______________________________________________________________________
+1. Page login
+   - formulaire de connexion 
+   - formulaire inscription
+        - formulaire santé
