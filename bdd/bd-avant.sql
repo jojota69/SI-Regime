@@ -233,10 +233,10 @@ INSERT INTO parametres (cle, valeur, description) VALUES
 -- ------------------------------------------------------------
 INSERT INTO users (nom, prenom, email, mot_de_passe, genre, date_naissance, role, option_gold, date_gold, solde_portefeuille) VALUES
 ('Rakoto',    'Jean',   'admin@app.mg',            'Admin1234',  'homme', '1985-03-15', 'admin', 0, NULL,                  0.00),
-('Rasoa',     'Marie',  'marie.rasoa@gmail.com',   'Marie1234',  'femme', '1995-07-22', 'user',  1, '2025-04-01 08:00:00', 25000.00),
-('Rabe',      'Paul',   'paul.rabe@gmail.com',     'Paul1234',   'homme', '1990-11-08', 'user',  0, NULL,                  10000.00),
-('Randria',   'Sophie', 'sophie.randria@yahoo.fr', 'Sophie1234', 'femme', '2000-04-30', 'user',  0, NULL,                   5000.00),
-('Ravalison', 'Luc',    'luc.ravalison@gmail.com', 'Luc1234',    'homme', '1988-09-14', 'user',  1, '2025-03-15 10:00:00', 50000.00);
+('Rasoa',     'Marie',  'marierasoa@gmail.com',   'Marie1234',  'femme', '1995-07-22', 'user',  1, '2025-04-01 08:00:00', 25000.00),
+('Rabe',      'Paul',   'paulrabe@gmail.com',     'Paul1234',   'homme', '1990-11-08', 'user',  0, NULL,                  10000.00),
+('Randria',   'Sophie', 'sophierandria@yahoo.fr', 'Sophie1234', 'femme', '2000-04-30', 'user',  0, NULL,                   5000.00),
+('Ravalison', 'Luc',    'lucravalison@gmail.com', 'Luc1234',    'homme', '1988-09-14', 'user',  1, '2025-03-15 10:00:00', 50000.00);
 
 -- ------------------------------------------------------------
 -- Profils de sante

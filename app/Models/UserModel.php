@@ -1,24 +1,16 @@
 <?php
 
-    namespace App\Models;
+namespace App\Models;
 
-    use CodeIgniter\Model;
+use CodeIgniter\Model;
 
-    class UserModel extends Model {
+class UserModel extends Model {
+    protected $table = 'users';
+    protected $primaryKey = 'id';
+    // Champs adaptés à la nouvelle BD (role, est_gold et solde ont des valeurs par défaut en BD)
+    protected $allowedFields = ['nom', 'prenom', 'email', 'mot_de_passe', 'genre', 'role', 'est_gold', 'solde_ariary'];
 
-        protected $table = 'users';
-
-        public function connectUser($mail, $password){
-
-            $login = $this->where('email', $mail)->first();
-            if ($login && $login['mot_de_passe'] === $password){
-                return true;
-            }
-
-            return false;
-
-        }
-
+    public function getUserByEmail($mail) {
+        return $this->where('email', $mail)->first();
     }
-
-?>
+}

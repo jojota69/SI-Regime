@@ -1,0 +1,56 @@
+CRITICAL - 2026-05-07 16:09:34 --> Error: Cannot call constructor
+[Method: GET, Route: /]
+in APPPATH\Controllers\User.php on line 14.
+ 1 SYSTEMPATH\CodeIgniter.php(921): App\Controllers\User->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-05-07 16:10:14 --> Error: Cannot call constructor
+[Method: GET, Route: /]
+in APPPATH\Controllers\User.php on line 14.
+ 1 SYSTEMPATH\CodeIgniter.php(921): App\Controllers\User->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-05-07 16:43:29 --> Error: Cannot call constructor
+[Method: GET, Route: /]
+in APPPATH\Controllers\User.php on line 14.
+ 1 SYSTEMPATH\CodeIgniter.php(921): App\Controllers\User->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-05-07 16:43:33 --> Error: Cannot call constructor
+[Method: GET, Route: /]
+in APPPATH\Controllers\User.php on line 14.
+ 1 SYSTEMPATH\CodeIgniter.php(921): App\Controllers\User->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-05-07 16:43:55 --> Error: Cannot call constructor
+[Method: GET, Route: /]
+in APPPATH\Controllers\User.php on line 14.
+ 1 SYSTEMPATH\CodeIgniter.php(921): App\Controllers\User->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-05-07 16:53:37 --> TypeError: CodeIgniter\Validation\Validation::run(): Argument #2 ($group) must be of type ?string, array given, called in C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\app\Models\UserModel.php on line 107
+[Method: POST, Route: user/connecter]
+in SYSTEMPATH\Validation\Validation.php on line 133.
+ 1 APPPATH\Models\UserModel.php(107): CodeIgniter\Validation\Validation->run([...], [...], [...])
+ 2 APPPATH\Controllers\User.php(56): App\Models\UserModel->validateLogin([...])
+ 3 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\User->connecter()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 5 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

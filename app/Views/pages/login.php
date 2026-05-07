@@ -31,5 +31,6 @@
         <input type="submit" value="Se connecter">
     </form>
     <p>Pas encore inscrit? <a href="/inscription">Inscrivez-vous ici!</a></p>
+
 </body>
 </html>
