@@ -21,7 +21,7 @@ class RegimeModel extends Model
     public function getSuggestionForObjectif(int $objectifId): ?array
     {
         $row = $this->db->table('regimes')
-            ->select('regimes.*, activites_sportives.nom as activite_nom, activites_sportives.intensite')
+            ->select('regimes.*, activites_sportives.nom as activite_nom')
             ->join('regime_activites', 'regime_activites.regime_id = regimes.id', 'left')
             ->join('activites_sportives', 'activites_sportives.id = regime_activites.activite_id', 'left')
             ->where('regimes.objectif_id', $objectifId)

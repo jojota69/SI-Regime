@@ -29,7 +29,12 @@ class User extends BaseController
 
         if ($user && $user['mot_de_passe'] === $password) {
             $this->setUserSession($user);
-            return redirect()->to('/home');
+            if ($user['role'] === 'admin'){
+                return redirect()->to('/admin');    
+            }
+            else{
+                return redirect()->to('/home');
+            }
         }
 
         return view('pages/login', ['error' => 'Email ou mot de passe incorrect.', 'mail' => $mail]);

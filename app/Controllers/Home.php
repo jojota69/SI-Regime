@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Models\CodePortefeuilleModel;
 use App\Models\ProfilSanteModel;
 use App\Models\PrixRegimeModel;
 use App\Models\UserModel;
@@ -53,59 +52,6 @@ class Home extends BaseController
             $userObjectifModel->update($payload['user_id'], $payload);
         } else {
             $userObjectifModel->insert($payload);
-        }
-
-        return redirect()->to('/home');
-    }
-
-    public function rechargerPortefeuille()
-    {
-        if (!session()->get('isLoggedIn')) {
-            return redirect()->to('/');
-        }
-
-        $code = trim((string) $this->request->getPost('code'));
-        if ($code === '') {
-            session()->setFlashdata('wallet_error', 'Code requis.');
-            return redirect()->to('/home');
-        }
-
-        $codeModel = new CodePortefeuilleModel();
-        $codeRow = $codeModel->where('code', $code)
-            ->where('est_valide', 1)
-            ->where('est_utilise', 0)
-            ->first();
-
-        if (empty($codeRow)) {
-            session()->setFlashdata('wallet_error', 'Code invalide ou deja utilise.');
-            return redirect()->to('/home');
-        }
-
-        $userId = (int) session()->get('id');
-        $userModel = new UserModel();
-        $user = $userModel->find($userId);
-
-        if (empty($user)) {
-            session()->setFlashdata('wallet_error', 'Utilisateur introuvable.');
-            return redirect()->to('/home');
-        }
-
-        $db = \Config\Database::connect();
-        $db->transStart();
-
-        $nouveauSolde = (float) $user['solde_ariary'] + (float) $codeRow['montant'];
-        $userModel->update($userId, ['solde_ariary' => $nouveauSolde]);
-        $codeModel->update((int) $codeRow['id'], [
-            'est_utilise' => 1,
-            'user_id' => $userId
-        ]);
-
-        $db->transComplete();
-
-        if ($db->transStatus() === false) {
-            session()->setFlashdata('wallet_error', 'Erreur lors de la recharge.');
-        } else {
-            session()->setFlashdata('wallet_message', 'Recharge effectuee.');
         }
 
         return redirect()->to('/home');
