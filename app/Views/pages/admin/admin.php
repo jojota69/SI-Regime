@@ -6,6 +6,12 @@
     <title>Panneau Admin - HealthyRegime</title>
     <link rel="stylesheet" href="/css/style.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap');
+
+        body {
+            font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+        }
+
         .admin-header {
             background: linear-gradient(135deg, var(--text-primary) 0%, #374151 100%);
             color: white;
@@ -119,22 +125,38 @@
                     Visualisez et gérez tous les codes de portefeuille du système
                 </div>
             </a>
-            
-            <div class="admin-card warning">
-                <div class="card-icon">⚙️</div>
-                <div class="card-title">Configuration</div>
+
+            <a href="/admin/regimes" class="admin-card">
+                <div class="card-icon">🥗</div>
+                <div class="card-title">CRUD des regimes</div>
                 <div class="card-description">
-                    Accédez aux paramètres et configurations du système
+                    Creez, modifiez et organisez les regimes et leurs prix
                 </div>
-            </div>
+            </a>
+
+            <a href="/admin/activites" class="admin-card">
+                <div class="card-icon">🏃</div>
+                <div class="card-title">CRUD des activites</div>
+                <div class="card-description">
+                    Gere la liste des activites sportives associees
+                </div>
+            </a>
             
-            <div class="admin-card danger">
+            <a href="/admin/parametres" class="admin-card warning">
+                <div class="card-icon">⚙️</div>
+                <div class="card-title">Parametres</div>
+                <div class="card-description">
+                    Accedez aux parametres et configurations du systeme
+                </div>
+            </a>
+            
+            <a href="/admin/stats" class="admin-card danger">
                 <div class="card-icon">📊</div>
                 <div class="card-title">Statistiques</div>
                 <div class="card-description">
                     Consultez les statistiques et rapports du système
                 </div>
-            </div>
+            </a>
         </div>
         
         <div class="section-panel">
@@ -145,8 +167,8 @@
             </p>
             <ul style="margin-top: 1rem; margin-left: 1.5rem;">
                 <li style="margin-bottom: 0.75rem;">👉 <strong>Gérer les codes</strong> - Visualisez tous les codes de portefeuille</li>
-                <li style="margin-bottom: 0.75rem;">👉 <strong>Valider les codes</strong> - Approuvez les nouveaux codes en attente</li>
-                <li>👉 <strong>Exporter les données</strong> - Générez des rapports pour l'analyse</li>
+                <li style="margin-bottom: 0.75rem;">👉 <strong>Regimes & activites</strong> - Gere la composition, les prix et les associations</li>
+                <li>👉 <strong>Statistiques</strong> - Tableaux de bord et rapports d'analyse</li>
             </ul>
         </div>
     </main>

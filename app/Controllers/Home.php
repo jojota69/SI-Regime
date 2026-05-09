@@ -8,11 +8,13 @@ use App\Models\UserModel;
 use App\Models\ObjectifModel;
 use App\Models\UserObjectifModel;
 use App\Models\RegimeModel;
+use App\Models\ParametreModel;
 use Dompdf\Dompdf;
 
 class Home extends BaseController
 {
-    private const GOLD_PRICE_ARIARY = 100000;
+    private const DEFAULT_GOLD_PRICE_ARIARY = 100000;
+    private const DEFAULT_GOLD_REMISE = 0.15;
 
     public function index()
     {
@@ -24,7 +26,7 @@ class Home extends BaseController
         $data = $this->chargerDonneesUtilisateur($userId);
         $data['walletMessage'] = session()->getFlashdata('wallet_message');
         $data['walletError'] = session()->getFlashdata('wallet_error');
-        $data['goldPrice'] = self::GOLD_PRICE_ARIARY;
+        $data['goldPrice'] = $this->getGoldPrice();
 
         return view('pages/home', $data);
     }
@@ -77,7 +79,9 @@ class Home extends BaseController
             return redirect()->to('/home');
         }
 
-        if ((float) $user['solde_ariary'] < self::GOLD_PRICE_ARIARY) {
+        $goldPrice = $this->getGoldPrice();
+
+        if ((float) $user['solde_ariary'] < $goldPrice) {
             session()->setFlashdata('wallet_error', 'Solde insuffisant pour activer Gold.');
             return redirect()->to('/home');
         }
@@ -85,7 +89,7 @@ class Home extends BaseController
         $db = \Config\Database::connect();
         $db->transStart();
 
-        $nouveauSolde = (float) $user['solde_ariary'] - self::GOLD_PRICE_ARIARY;
+        $nouveauSolde = (float) $user['solde_ariary'] - $goldPrice;
         $userModel->update($userId, [
             'est_gold' => 1,
             'solde_ariary' => $nouveauSolde
@@ -111,7 +115,7 @@ class Home extends BaseController
         $userId = (int) session()->get('id');
         $data = $this->chargerDonneesUtilisateur($userId);
         $data['dateExport'] = date('Y-m-d');
-        $data['goldPrice'] = self::GOLD_PRICE_ARIARY;
+        $data['goldPrice'] = $this->getGoldPrice();
 
         $html = view('pages/export_pdf', $data);
 
@@ -146,6 +150,7 @@ class Home extends BaseController
         $prixBase = null;
         $prixFinal = null;
         $prixDuree = null;
+        $remiseGold = $this->getGoldRemise();
 
         if (!empty($userObjectif)) {
             $objectif = $objectifModel->find($userObjectif['objectif_id']);
@@ -163,7 +168,8 @@ class Home extends BaseController
                         $prixBase = (float) $prix['prix_ariary'];
                         $prixDuree = (int) $prix['duree_jours'];
                         $estGold = !empty($user) && (int) $user['est_gold'] === 1;
-                        $prixFinal = $estGold ? round($prixBase * 0.85, 2) : $prixBase;
+                        $remise = min(max($remiseGold, 0.0), 0.9);
+                        $prixFinal = $estGold ? round($prixBase * (1 - $remise), 2) : $prixBase;
                     }
                 }
             }
@@ -213,5 +219,25 @@ class Home extends BaseController
         $duree = (int) round($baseJours / $facteur);
 
         return (int) min(180, max(7, $duree));
+    }
+
+    private function getGoldPrice(): float
+    {
+        $paramModel = new ParametreModel();
+        $price = $paramModel->getFloat('prix_gold', self::DEFAULT_GOLD_PRICE_ARIARY);
+
+        return $price > 0 ? $price : self::DEFAULT_GOLD_PRICE_ARIARY;
+    }
+
+    private function getGoldRemise(): float
+    {
+        $paramModel = new ParametreModel();
+        $remise = $paramModel->getFloat('remise_gold', self::DEFAULT_GOLD_REMISE);
+
+        if ($remise > 1) {
+            $remise = $remise / 100;
+        }
+
+        return $remise;
     }
 }

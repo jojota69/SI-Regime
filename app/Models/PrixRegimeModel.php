@@ -18,4 +18,11 @@ class PrixRegimeModel extends Model
 
         return $row ?: null;
     }
+
+    public function getPrixForRegime(int $regimeId): array
+    {
+        return $this->where('regime_id', $regimeId)
+            ->orderBy('duree_jours', 'ASC')
+            ->findAll();
+    }
 }

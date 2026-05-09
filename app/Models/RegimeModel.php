@@ -10,11 +10,11 @@ class RegimeModel extends Model
     protected $primaryKey = 'id';
     protected $allowedFields = [
         'nom',
-        'description',
         'pct_viande',
         'pct_poisson',
         'pct_volaille',
         'variation_poids_kg',
+        'duree_standard_jours',
         'objectif_id'
     ];
 
