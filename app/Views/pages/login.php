@@ -1,83 +1,79 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion - HealthyRegime</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <style>
-        .login-container {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-        }
-        
-        .login-card {
-            background: var(--bg-primary);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: var(--shadow-xl);
-        }
-        
-        .login-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .login-logo {
-            font-size: 2.5rem;
-            color: var(--primary);
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-        }
-        
-        .login-subtitle {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-        }
-        
-        .errors {
-            list-style: none;
-            padding: 1rem;
-            background-color: #FEE2E2;
-            border-left: 4px solid var(--danger);
-            border-radius: var(--radius);
-            margin-bottom: 1rem;
-            color: #7F1D1D;
-        }
-        
-        .errors li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .btn-login {
-            width: 100%;
-            margin-top: 1.5rem;
-        }
-        
-        .login-footer {
-            text-align: center;
-            margin-top: 1.5rem;
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-        }
-        
-        .login-footer a {
-            color: var(--primary);
-            font-weight: 600;
-        }
-    </style>
-</head>
-<body>
-    <div class="login-container">
+<?php $this->extend('layouts/auth'); ?>
+
+<?php $this->section('content'); ?>
+
+<style>
+    .login-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    }
+    
+    .login-card {
+        background: var(--bg-primary);
+        border-radius: var(--radius-lg);
+        padding: 2rem;
+        width: 100%;
+        max-width: 400px;
+        box-shadow: var(--shadow-xl);
+    }
+    
+    .login-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    
+    .login-logo {
+        font-size: 2.5rem;
+        color: var(--primary);
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+    }
+    
+    .login-subtitle {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+    }
+    
+    .errors {
+        list-style: none;
+        padding: 1rem;
+        background-color: #FEE2E2;
+        border-left: 4px solid var(--danger);
+        border-radius: var(--radius);
+        margin-bottom: 1rem;
+        color: #7F1D1D;
+    }
+    
+    .errors li {
+        margin-bottom: 0.5rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    .btn-login {
+        width: 100%;
+        margin-top: 1.5rem;
+    }
+    
+    .login-footer {
+        text-align: center;
+        margin-top: 1.5rem;
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+    }
+    
+    .login-footer a {
+        color: var(--primary);
+        font-weight: 600;
+    }
+</style>
+
+<div class="login-container">
         <div class="login-card">
             <div class="login-header">
                 <div class="login-logo">🥗</div>
@@ -121,5 +117,6 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+</div>
+
+<?php $this->endSection(); ?>

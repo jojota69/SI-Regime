@@ -1,225 +1,162 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil - HealthyRegime</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <style>
-        header {
-            background: white;
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-        
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary);
-        }
-        
-        .header-right {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-        
-        .user-info {
-            text-align: right;
-            font-size: 0.875rem;
-        }
-        
-        .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 2rem 0;
-            margin-bottom: 2rem;
-            border-radius: var(--radius-lg);
-        }
-        
-        .hero-content {
-            text-align: center;
-        }
-        
-        .hero h1 {
-            color: white;
-            margin-bottom: 0.5rem;
-        }
-        
-        .hero p {
-            color: rgba(255,255,255,0.9);
-            font-size: 1.125rem;
-        }
-        
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-        
-        .stat-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: var(--radius-lg);
-            text-align: center;
-            box-shadow: var(--shadow-md);
-        }
-        
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-        
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
-        
-        .main-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        @media (max-width: 1024px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .section {
-            background: white;
-            padding: 1.5rem;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
-        }
-        
-        .section-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--bg-tertiary);
-        }
-        
-        .wallet-status {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            background: var(--bg-secondary);
-            border-radius: var(--radius);
-        }
-        
-        .wallet-item {
-            text-align: center;
-        }
-        
-        .wallet-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-        
-        .wallet-label {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .suggestion-box {
-            background: linear-gradient(135deg, #F0FDF4 0%, #DBEAFE 100%);
-            padding: 1.5rem;
-            border-radius: var(--radius-lg);
-            border-left: 4px solid var(--primary);
-            margin-bottom: 1.5rem;
-        }
-        
-        .suggestion-header {
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .suggestion-item {
-            margin-bottom: 1rem;
-        }
-        
-        .suggestion-label {
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.25rem;
-        }
-        
-        .suggestion-value {
-            color: var(--text-secondary);
-        }
-        
-        .sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-        
-        .action-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .btn {
-            width: 100%;
-        }
-        
-        .footer-links {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border);
-        }
-        
-        .footer-links a {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">🥗 HealthyRegime</div>
-                <div class="header-right">
-                    <div class="user-info">
-                        <div style="color: var(--text-primary); font-weight: 600;">Bienvenue!</div>
-                        <div style="color: var(--text-secondary);">User ID: <?= esc(session()->get('id')) ?></div>
-                    </div>
-                    <a href="/logout" class="btn btn-danger btn-small">Déconnexion</a>
-                </div>
-            </div>
-        </div>
-    </header>
+<?php $this->extend('layouts/main'); ?>
+
+<?php $this->section('content'); ?>
+
+<style>
+    .hero {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        color: white;
+        padding: 2rem 0;
+        margin-bottom: 2rem;
+        border-radius: var(--radius-lg);
+    }
     
-    <main class="container">
+    .hero-content {
+        text-align: center;
+    }
+    
+    .hero h1 {
+        color: white;
+        margin-bottom: 0.5rem;
+    }
+    
+    .hero p {
+        color: rgba(255,255,255,0.9);
+        font-size: 1.125rem;
+    }
+    
+    .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+    
+    .stat-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: var(--radius-lg);
+        text-align: center;
+        box-shadow: var(--shadow-md);
+    }
+    
+    .stat-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+    }
+    
+    .stat-label {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        font-weight: 600;
+    }
+    
+    .main-content {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    @media (max-width: 1024px) {
+        .main-content {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+    .section {
+        background: white;
+        padding: 1.5rem;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-md);
+    }
+    
+    .section-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid var(--bg-tertiary);
+    }
+    
+    .wallet-status {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        background: var(--bg-secondary);
+        border-radius: var(--radius);
+    }
+    
+    .wallet-item {
+        text-align: center;
+    }
+    
+    .wallet-value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary);
+    }
+    
+    .wallet-label {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+    }
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    .suggestion-box {
+        background: linear-gradient(135deg, #F0FDF4 0%, #DBEAFE 100%);
+        padding: 1.5rem;
+        border-radius: var(--radius-lg);
+        border-left: 4px solid var(--primary);
+        margin-bottom: 1.5rem;
+    }
+    
+    .suggestion-header {
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .suggestion-item {
+        margin-bottom: 1rem;
+    }
+    
+    .suggestion-label {
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+    }
+    
+    .suggestion-value {
+        color: var(--text-secondary);
+    }
+    
+    .sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .action-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+</style>
         <?php if (!empty($walletMessage)): ?>
             <div class="alert alert-success mt-3">
                 ✓ <?= esc($walletMessage) ?>
@@ -432,13 +369,5 @@
                 </div>
             </div>
         </div>
-    </main>
-    
-    <footer>
-        <div class="container text-center">
-            <p>&copy; 2026 HealthyRegime - Votre assistant de régime personnel</p>
-            <p style="font-size: 0.875rem; color: #999;">Prenez soin de votre santé avec nos recommandations personnalisées</p>
-        </div>
-    </footer>
-</body>
-</html>
+
+<?php $this->endSection(); ?>

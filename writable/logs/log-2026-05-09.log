@@ -1,0 +1,53 @@
+ERROR - 2026-05-09 11:09:30 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'regime', 3306, '', 0)
+#1 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\system\Database\BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\system\Database\BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\system\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#6 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\app\Models\UserModel.php(14): CodeIgniter\BaseModel->first()
+#7 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\app\Controllers\User.php(28): App\Models\UserModel->getUserByEmail('rova@gmail.com')
+#8 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\system\CodeIgniter.php(951): App\Controllers\User->connecter()
+#9 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#10 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\system\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\system\Boot.php(417): CodeIgniter\CodeIgniter->run()
+#12 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\system\Database\MySQLi\Connection.php:231
+Stack trace:
+#0 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\system\Database\BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\system\Database\BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\system\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#5 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\app\Models\UserModel.php(14): CodeIgniter\BaseModel->first()
+#6 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\app\Controllers\User.php(28): App\Models\UserModel->getUserByEmail('rova@gmail.com')
+#7 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\system\CodeIgniter.php(951): App\Controllers\User->connecter()
+#8 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#9 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\system\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\system\Boot.php(417): CodeIgniter\CodeIgniter->run()
+#11 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\Users\Rova RAKOTOBE\Documents\WORK\S4\SI\CodeIgniter\SI-Regime\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2026-05-09 11:09:30 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it
+[Method: POST, Route: login]
+in SYSTEMPATH\Database\BaseConnection.php on line 606.
+ 1 SYSTEMPATH\Database\BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `users`
+WHERE `email` = :email:
+ LIMIT 1', [...], false)
+ 3 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 5 APPPATH\Models\UserModel.php(14): CodeIgniter\BaseModel->first()
+ 6 APPPATH\Controllers\User.php(28): App\Models\UserModel->getUserByEmail('rova@gmail.com')
+ 7 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\User->connecter()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 9 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
