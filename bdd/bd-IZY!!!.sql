@@ -3,22 +3,24 @@ USE regime;
 
 SET FOREIGN_KEY_CHECKS = 0;
 
--- Suppression des tables pour remise à zéro propre
-DROP TABLE IF EXISTS historique_poids;
-DROP TABLE IF EXISTS codes_portefeuille;
+-- Nettoyage complet des tables
+DROP TABLE IF EXISTS achats_gold;
+DROP TABLE IF EXISTS parametres;
 DROP TABLE IF EXISTS souscriptions;
+DROP TABLE IF EXISTS codes_portefeuille;
 DROP TABLE IF EXISTS regime_activites;
 DROP TABLE IF EXISTS activites_sportives;
 DROP TABLE IF EXISTS prix_regimes;
 DROP TABLE IF EXISTS regimes;
 DROP TABLE IF EXISTS user_objectifs;
 DROP TABLE IF EXISTS objectifs;
+DROP TABLE IF EXISTS historique_poids;
 DROP TABLE IF EXISTS profils_sante;
 DROP TABLE IF EXISTS users;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
--- 1. UTILISATEURS (Page 1 de l'inscription + Auth)
+-- 1. UTILISATEURS [cite: 23, 59]
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(100) NOT NULL,
@@ -32,7 +34,7 @@ CREATE TABLE users (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
--- 2. PROFILS SANTÉ (Page 2 de l'inscription)
+-- 2. PROFILS SANTÉ [cite: 18, 24]
 CREATE TABLE profils_sante (
     user_id INT PRIMARY KEY,
     taille_cm DECIMAL(5,2) NOT NULL,
@@ -41,7 +43,7 @@ CREATE TABLE profils_sante (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- 3. HISTORIQUE (Pour suivi IMC et export PDF)
+-- 3. HISTORIQUE (Pour export PDF) [cite: 31]
 CREATE TABLE historique_poids (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -50,15 +52,14 @@ CREATE TABLE historique_poids (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- 4. OBJECTIFS (Les 3 choix possibles)
+-- 4. OBJECTIFS [cite: 26, 27, 28, 29]
 CREATE TABLE objectifs (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nom VARCHAR(100) NOT NULL -- 'Augmenter poids', 'Réduire poids', 'IMC idéal'
+    nom VARCHAR(100) NOT NULL 
 ) ENGINE=InnoDB;
 
 INSERT INTO objectifs (nom) VALUES ('Augmenter son poids'), ('Réduire son poids'), ('Atteindre son IMC idéal');
 
--- Lien Utilisateur <-> Objectif choisi
 CREATE TABLE user_objectifs (
     user_id INT PRIMARY KEY,
     objectif_id INT NOT NULL,
@@ -67,20 +68,20 @@ CREATE TABLE user_objectifs (
     FOREIGN KEY (objectif_id) REFERENCES objectifs(id)
 ) ENGINE=InnoDB;
 
--- 5. RÉGIMES (Back Office CRUD)
+-- 5. RÉGIMES [cite: 44, 51, 61]
 CREATE TABLE regimes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(150) NOT NULL,
-    description TEXT,
     pct_viande DECIMAL(5,2) NOT NULL,
     pct_poisson DECIMAL(5,2) NOT NULL,
     pct_volaille DECIMAL(5,2) NOT NULL,
-    variation_poids_kg DECIMAL(5,2) NOT NULL, -- Poids gagné ou perdu par le régime
-    objectif_id INT NOT NULL, -- Pour la suggestion automatique
+    variation_poids_kg DECIMAL(5,2) NOT NULL, 
+    duree_standard_jours INT NOT NULL,
+    objectif_id INT NOT NULL,
     FOREIGN KEY (objectif_id) REFERENCES objectifs(id)
 ) ENGINE=InnoDB;
 
--- 6. PRIX DES RÉGIMES (Variant selon la durée)
+-- 6. PRIX DES RÉGIMES (Variation selon durée) 
 CREATE TABLE prix_regimes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     regime_id INT NOT NULL,
@@ -89,14 +90,14 @@ CREATE TABLE prix_regimes (
     FOREIGN KEY (regime_id) REFERENCES regimes(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- 7. ACTIVITÉS SPORTIVES (Back Office CRUD)
+-- 7. ACTIVITÉS SPORTIVES [cite: 30, 45, 62]
 CREATE TABLE activites_sportives (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(150) NOT NULL,
-    intensite VARCHAR(50) -- calories/h ou niveau
+    objectif_id INT NULL,
+    FOREIGN KEY (objectif_id) REFERENCES objectifs(id)
 ) ENGINE=InnoDB;
 
--- Association Régime <-> Sport
 CREATE TABLE regime_activites (
     regime_id INT NOT NULL,
     activite_id INT NOT NULL,
@@ -105,50 +106,84 @@ CREATE TABLE regime_activites (
     FOREIGN KEY (activite_id) REFERENCES activites_sportives(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- 8. PORTE-MONNAIE (Codes à rentrer)
+-- 8. PORTE-MONNAIE [cite: 32, 46, 60]
 CREATE TABLE codes_portefeuille (
     id INT AUTO_INCREMENT PRIMARY KEY,
     code VARCHAR(50) NOT NULL UNIQUE,
     montant DECIMAL(10,2) NOT NULL,
     est_utilise TINYINT(1) DEFAULT 0,
-    est_valide TINYINT(1) DEFAULT 0, -- Validation par l'admin
+    est_valide TINYINT(1) DEFAULT 0,
     user_id INT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
--- 9. SOUSCRIPTIONS (Achats de régimes)
+-- 9. OPTION GOLD ET PARAMÈTRES [cite: 36, 46]
+CREATE TABLE achats_gold (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    montant_paye DECIMAL(10,2) NOT NULL,
+    date_achat DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+CREATE TABLE parametres (
+    cle VARCHAR(50) PRIMARY KEY,
+    valeur VARCHAR(100) NOT NULL,
+    description VARCHAR(255)
+) ENGINE=InnoDB;
+
+-- 10. SOUSCRIPTIONS
 CREATE TABLE souscriptions (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     regime_id INT NOT NULL,
     date_achat DATETIME DEFAULT CURRENT_TIMESTAMP,
-    montant_paye DECIMAL(10,2) NOT NULL, -- Prix après remise Gold éventuelle
+    montant_paye DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (regime_id) REFERENCES regimes(id)
 ) ENGINE=InnoDB;
 
--- DONNÉES DE TESTS (Requirements minimum)
--- 5 Users
-INSERT INTO users (nom, prenom, email, mot_de_passe, genre, role) VALUES 
-('Admin', 'S4', 'admin@app.com', 'admin123', 'homme', 'admin'),
-('Rasoa', 'Jean', 'jean@gmail.com', '123456', 'homme', 'user'),
-('Rabe', 'Marie', 'marie@gmail.com', '123456', 'femme', 'user'),
-('Randria', 'Luc', 'luc@gmail.com', '123456', 'homme', 'user'),
-('Rakoto', 'Lova', 'lova@gmail.com', '123456', 'femme', 'user');
+-- --- INSERTIONS DE DONNÉES ---
 
--- 15 Codes
+-- Paramètres [cite: 36, 46]
+INSERT INTO parametres (cle, valeur, description) VALUES 
+('prix_gold', '20000', 'Prix unique pour l''option Gold'),
+('remise_gold', '0.15', 'Taux de remise de 15% pour les membres Gold');
+
+-- Utilisateurs (5 minimum) [cite: 59]
+INSERT INTO users (nom, prenom, email, mot_de_passe, genre, role) VALUES 
+('Admin', 'System', 'admin@regime.com', 'admin123', 'homme', 'admin'),
+('Rakoto', 'Jean', 'jean@mail.com', 'user123', 'homme', 'user'),
+('Rabe', 'Alice', 'alice@mail.com', 'user123', 'femme', 'user'),
+('Rasoa', 'Liva', 'liva@mail.com', 'user123', 'femme', 'user'),
+('Randria', 'Marc', 'marc@mail.com', 'user123', 'homme', 'user');
+
+-- Codes Portefeuille (15 minimum) [cite: 60]
 INSERT INTO codes_portefeuille (code, montant) VALUES 
 ('ABC1', 5000), ('ABC2', 5000), ('ABC3', 5000), ('ABC4', 10000), ('ABC5', 10000),
 ('ABC6', 10000), ('ABC7', 20000), ('ABC8', 20000), ('ABC9', 20000), ('ABC10', 50000),
 ('ABC11', 50000), ('ABC12', 50000), ('ABC13', 100000), ('ABC14', 100000), ('ABC15', 100000);
 
--- 5 Régimes
-INSERT INTO regimes (nom, pct_viande, pct_poisson, pct_volaille, variation_poids_kg, objectif_id) VALUES 
-('Minceur Poisson', 10, 70, 20, -3.5, 2),
-('Prise de Masse Viande', 60, 10, 30, 4.0, 1),
-('Équilibre Volaille', 20, 20, 60, 0.5, 3),
-('Mixte Perte', 30, 40, 30, -2.0, 2),
-('Force Protéine', 45, 20, 35, 2.5, 1);
+-- Régimes (5 minimum) [cite: 51, 61]
+INSERT INTO regimes (nom, pct_viande, pct_poisson, pct_volaille, variation_poids_kg, duree_standard_jours, objectif_id) VALUES 
+('Minceur Océan', 10, 70, 20, -2.5, 7, 2),
+('Bulk Protéine', 60, 10, 30, 3.0, 10, 1),
+('Équilibre Vital', 20, 30, 50, 0.5, 7, 3),
+('Déficit Express', 20, 40, 40, -1.5, 5, 2),
+('Puissance Viande', 70, 0, 30, 4.0, 14, 1);
 
--- 5 Sports
-INSERT INTO activites_sportives (nom) VALUES ('Natation'), ('Course à pied'), ('Musculation'), ('Yoga'), ('Vélo');
+-- Prix des régimes (Variation par durée) 
+INSERT INTO prix_regimes (regime_id, duree_jours, prix_ariary) VALUES 
+(1, 7, 30000), (1, 14, 55000), (1, 28, 100000),
+(2, 7, 40000), (2, 14, 75000), (2, 28, 140000),
+(3, 7, 25000), (3, 14, 45000), (3, 28, 85000),
+(4, 7, 35000), (4, 14, 65000), (4, 28, 120000),
+(5, 7, 50000), (5, 14, 95000), (5, 28, 180000);
+
+-- Activités Sportives (5 minimum) [cite: 62]
+INSERT INTO activites_sportives (nom, objectif_id) VALUES 
+('Natation', 2), ('Musculation', 1), ('Course à pied', 2), ('Yoga', 3), ('Cyclisme', 2);
+
+-- Association Régime / Sport [cite: 30]
+INSERT INTO regime_activites (regime_id, activite_id) VALUES 
+(1, 1), (1, 3), (2, 2), (3, 4), (4, 3), (4, 5), (5, 2);
