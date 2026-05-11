@@ -27,7 +27,7 @@ class User extends BaseController
         $userModel = new UserModel();
         $user = $userModel->getUserByEmail($mail);
 
-        if ($user && $user['mot_de_passe'] === $password) {
+        if ($user && password_verify($password, $user['mot_de_passe'])) {
             $this->setUserSession($user);
             if ($user['role'] === 'admin'){
                 return redirect()->to('/admin');    
@@ -93,7 +93,7 @@ class User extends BaseController
             'prenom'       => $dataP1['prenom'],
             'email'        => $dataP1['email'],
             'genre'        => $dataP1['genre'],
-            'mot_de_passe' => $dataP1['password'],
+            'mot_de_passe' => password_hash($dataP1['password'], PASSWORD_DEFAULT),
             'role'         => 'user'
         ]);
 

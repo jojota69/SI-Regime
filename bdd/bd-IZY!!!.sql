@@ -152,11 +152,11 @@ INSERT INTO parametres (cle, valeur, description) VALUES
 
 -- Utilisateurs (5 minimum) [cite: 59]
 INSERT INTO users (nom, prenom, email, mot_de_passe, genre, role) VALUES 
-('Admin', 'System', 'admin@regime.com', 'admin123', 'homme', 'admin'),
-('Rakoto', 'Jean', 'jean@mail.com', 'user123', 'homme', 'user'),
-('Rabe', 'Alice', 'alice@mail.com', 'user123', 'femme', 'user'),
-('Rasoa', 'Liva', 'liva@mail.com', 'user123', 'femme', 'user'),
-('Randria', 'Marc', 'marc@mail.com', 'user123', 'homme', 'user');
+('Admin', 'System', 'admin@regime.com', '$2y$10$xptCVoCbdWXGRyWCp5HYBuGeLb3zy5sCc0iOujdMtcZvPR22qQLU.', 'homme', 'admin'),
+('Rakoto', 'Jean', 'jean@mail.com', '$2y$10$qIMeGZiA6Uho6c2gqsMU9ODwk1svADyKWyvHt6mRFeDi2hE7y0rwu', 'homme', 'user'),
+('Rabe', 'Alice', 'alice@mail.com', '$2y$10$qIMeGZiA6Uho6c2gqsMU9ODwk1svADyKWyvHt6mRFeDi2hE7y0rwu', 'femme', 'user'),
+('Rasoa', 'Liva', 'liva@mail.com', '$2y$10$qIMeGZiA6Uho6c2gqsMU9ODwk1svADyKWyvHt6mRFeDi2hE7y0rwu', 'femme', 'user'),
+('Randria', 'Marc', 'marc@mail.com', '$2y$10$qIMeGZiA6Uho6c2gqsMU9ODwk1svADyKWyvHt6mRFeDi2hE7y0rwu', 'homme', 'user');
 
 -- Codes Portefeuille (15 minimum) [cite: 60]
 INSERT INTO codes_portefeuille (code, montant) VALUES 
